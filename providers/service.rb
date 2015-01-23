@@ -34,6 +34,7 @@ def load_current_resource
   @supervisor_gid = Logstash.get_attribute_or_default(node, @instance, 'supervisor_gid')
   @runit_run_template_name = Logstash.get_attribute_or_default(node, @instance, 'runit_run_template_name')
   @runit_log_template_name = Logstash.get_attribute_or_default(node, @instance, 'runit_log_template_name')
+  @runit_timeout = Logstash.get_attribute_or_default(node, @instance, 'runit_timeout')
   @nofile_soft = Logstash.get_attribute_or_default(node, @instance, 'limit_nofile_soft')
   @nofile_hard = Logstash.get_attribute_or_default(node, @instance, 'limit_nofile_hard')
 end
@@ -81,6 +82,7 @@ action :enable do
       cookbook  svc[:templates_cookbook]
       run_template_name svc[:runit_run_template_name]
       log_template_name svc[:runit_log_template_name]
+      sv_timeout svc[:runit_timeout]
     end
     new_resource.updated_by_last_action(ri.updated_by_last_action?)
 
@@ -252,6 +254,7 @@ def svc_vars
     templates_cookbook: @templates_cookbook,
     runit_run_template_name: @runit_run_template_name,
     runit_log_template_name: @runit_log_template_name,
+    runit_timeout: @runit_timeout,
     nofile_soft: @nofile_soft,
     nofile_hard: @nofile_hard
   }

@@ -62,6 +62,8 @@ default['logstash']['instance_default']['service_templates_cookbook']  = 'logsta
 default['logstash']['instance_default']['runit_run_template_name'] = 'logstash'
 default['logstash']['instance_default']['runit_log_template_name'] = 'logstash'
 
+default['logstash']['instance_default']['runit_timeout'] = 7
+
 default['logstash']['instance_default']['limit_nofile_soft']  = 65550
 default['logstash']['instance_default']['limit_nofile_hard']  = 65550
 
